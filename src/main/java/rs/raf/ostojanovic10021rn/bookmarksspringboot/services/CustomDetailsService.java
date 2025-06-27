@@ -9,13 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class CustomDetailsService implements UserDetailsService {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        try {
+            return userService.loadUserByUsername(email);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
 }

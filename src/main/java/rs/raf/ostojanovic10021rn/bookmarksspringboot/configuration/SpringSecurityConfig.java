@@ -1,6 +1,8 @@
 package rs.raf.ostojanovic10021rn.bookmarksspringboot.configuration;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +15,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import rs.raf.ostojanovic10021rn.bookmarksspringboot.security.JwtFilter;
-import rs.raf.ostojanovic10021rn.bookmarksspringboot.services.UserService;
 import rs.raf.ostojanovic10021rn.bookmarksspringboot.services.CustomDetailsService;
+import rs.raf.ostojanovic10021rn.bookmarksspringboot.services.UserService;
 
 @CrossOrigin("*")
 @EnableWebSecurity
@@ -44,10 +46,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/auth/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/ws/**").permitAll()
-                .antMatchers("/noteMessage/**").permitAll()
-                .antMatchers("/update-note/**").permitAll()
-                .antMatchers("/app/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
